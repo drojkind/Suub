@@ -2,7 +2,14 @@
 Find the hash for the selected movie.
 Based on the Open Subtitles JS Implementationß
 */
-document.getElementById('files').onchange = function() {
+
+export function consoleLog() {
+  console.log("this is a console log");
+};
+export function hashIt() {
+  var movieHash;
+  var videoFile;
+  var fs;
 
   var files = document.getElementById("files").files;
 
@@ -23,7 +30,7 @@ document.getElementById('files').onchange = function() {
       return
     }
     if (d.length > 1) {
-      alert("Please select only one file.");
+      console.log("Please select only one file.");
       return
     }
     var e = Array(8);
@@ -32,13 +39,13 @@ document.getElementById('files').onchange = function() {
     else fs = videoFile.size;
     for (var a = fs, f = 0; f < 8; f++) {
       e[f] = a & 255;
-      a = a >> 8
+      a  >>= 8
     }
     a = fs;
     if (videoFile.slice) var c = videoFile.slice(0, b);
     else if (videoFile.mozSlice) var c = videoFile.mozSlice(0, b);
     else if (videoFile.webkitSlice) var c = videoFile.webkitSlice(0, b);
-    var g = new FileReader;
+    var g = new FileReader();
     g.onloadend = function(h) {
       if (h.target.readyState == FileReader.DONE) {
         for (var f = h.target.result, d = 0; d < f.length; d++) e[(d + 8) % 8] += f.charCodeAt(d);
@@ -51,12 +58,10 @@ document.getElementById('files').onchange = function() {
           if (c.target.readyState == FileReader.DONE) {
             f = c.target.result;
             for (d = 0; d < f.length; d++) e[(d + 8) % 8] += f.charCodeAt(d);
-            //var g = document.getElementById(b).selectedIndex,
-            //    a = document.getElementById(b).options[g].value;
-            //if (a == "") a = "all";
             a = 'all';
             //document.location = "http://www.opensubtitles.org/search/sublanguageid-" + a + "/moviehash-" + binl2hex(e);
             console.log("Moviehash - " + binl2hex(e));
+            var movieHash = binl2hex(e);
           }
         };
         g.readAsBinaryString(c)
@@ -85,5 +90,5 @@ document.getElementById('files').onchange = function() {
     for (var d = "0123456789abcdef", e = "", c = 7; c > -1; c--) e += d.charAt(a[c] >> 4 & 15) + d.charAt(a[c] & 15);
     return e
   }
-
+ return movieHash;
 };

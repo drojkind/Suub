@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import * as utils from './hashcode.js';
 
 class App extends Component {
-  componentDidMount() {
-    var addScript = document.createElement('script');
-    addScript.setAttribute('src', 'https://cdn.3dvision.xyz/hashcode.js');
-    document.body.appendChild(addScript);
-  };
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Subtitle downloader</h2>
         </div>
         <p className="App-intro">
-          <input type="file" id="files" name="files[]"/>
+          <input type="file" id="files" name="files[]" onChange={utils.hashIt} />
         </p>
         <div id="scripts">
         </div>

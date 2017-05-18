@@ -2,12 +2,10 @@
 Find the hash for the selected movie.
 Based on the Open Subtitles JS Implementationß
 */
+/* eslint-disable */
 
-export function consoleLog() {
-  console.log("this is a console log");
-};
 export function hashIt() {
-  var movieHash;
+  console.log("its working");
   var videoFile;
   var fs;
 
@@ -60,8 +58,12 @@ export function hashIt() {
             for (d = 0; d < f.length; d++) e[(d + 8) % 8] += f.charCodeAt(d);
             a = 'all';
             //document.location = "http://www.opensubtitles.org/search/sublanguageid-" + a + "/moviehash-" + binl2hex(e);
-            console.log("Moviehash - " + binl2hex(e));
-            var movieHash = binl2hex(e);
+            localStorage.setItem('myHash', binl2hex(e));
+            console.log("MovieHash - " + binl2hex(e));
+            localStorage.setItem('myMovie', videoFile.name);
+            console.log("MovieName - " + videoFile.name);
+            console.log("MovieSize - " + videoFile.size);
+            const movieHash = binl2hex(e);
           }
         };
         g.readAsBinaryString(c)
@@ -90,5 +92,5 @@ export function hashIt() {
     for (var d = "0123456789abcdef", e = "", c = 7; c > -1; c--) e += d.charAt(a[c] >> 4 & 15) + d.charAt(a[c] & 15);
     return e
   }
- return movieHash;
+ //return movieHash;
 };

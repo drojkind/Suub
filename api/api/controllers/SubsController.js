@@ -19,20 +19,14 @@ module.exports = {
       gzip: false
     }).then(subtitles => {
       if (subtitles) {
-        //console.log('Subtitle found:', subtitles);
-        return res.json({
-          movieHash: subtitles
-        });
+        //console.log('Subtitle found:', subtitles); // Log error message to sails console
+        return res.json({ subtitles: subtitles });
         require('request')({
-          url: subtitles.es.url,
+          url: subtitles.en.url,
           encoding: null
         }, (error, response, data) => {
           if (error) throw error;
-          require('zlib').unzip(data, (error, buffer) => {
-            if (error) throw error;
-            const subtitle_content = buffer.toString(subtitles.en.encoding);
-            // console.log('Subtitle content:', subtitle_content);
-          });
+          //Error Messages
         });
       } else {
         throw 'no subtitle found';
@@ -41,11 +35,5 @@ module.exports = {
         });
       }
     }).catch(console.error);
-    // return res.json({movieHash: req.query.rolo,
-    //                 movieName: 'This the name'
-    //  });
-  },
-  bye: function(req, res) {
-    return res.redirect('http://www.danielrojkind.com');
   }
 };

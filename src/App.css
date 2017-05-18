@@ -8,3 +8,7 @@
   padding: 20px 20px 40px 20px;
   color: white;
 }
+
+.subResults {
+  display: none;
+}

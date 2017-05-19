@@ -1,47 +1,37 @@
 import React, {
   Component
 } from 'react';
-import axios from 'axios';
 import './App.css';
-import * as utils from './hashcode.js';
+import * as utils from './utils.js';
 
-//import * as utils from './hashcode.js';
 class App extends Component {
 
-
   constructor(props) {
-    super(props);
-
-    this.state = {
-      subs: []
-    };
+    super();
+    this.state = {subsData: false}
+    this.getSubs = this.getSubs.bind(this);
   }
 
   getSubs() {
 
-    utils.hashIt();
-    setTimeout(function(){
-    var myHash = localStorage.getItem('myHash'); // Grab Movie hash from localStorage
-    axios.get('http://localhost:1337/subs/movie', {
-        params: {
-          hash: myHash
-        }
-      })
-      .then(function(response) {
-        console.log(response);
-        const subs = response.data.data.children.map(obj => obj.data);
-        this.setState({ subs });
-        document.getElementById("subResults").style.display = "block";
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    }, 10); //time out 10ms
+    utils.hashIt(() => {
+       var myHash = localStorage.getItem('myHash'); // Grab Movie hash from localStorage
+          fetch('http://localhost:1337/subs/movie?hash=' + myHash).then((response) => {
+          	return response.json();
+          }).then((subs) => {
+          	console.log(subs);
+            this.setState({subsData: subs.subtitles})
+          }).catch(function(err) {
+            console.log(err);
+          });
+    });
 
   }
 
+
   render() {
     return (
+
       <div className="App">
         <div className="App-header">
           <h2>Subtitle downloader</h2>
@@ -49,8 +39,15 @@ class App extends Component {
         <p className="App-intro">
           <input type="file" id="files" name="files[]" onChange={this.getSubs} />
         </p>
-        <div className="subResults" id="subResults">
-        <a href="https://www.google.com">Language</a>
+        <div className="subResults" id="subResults" style={{display: this.state.subsData ? 'block' : 'none'}}>
+            <ul>
+                {utils.getSubtitles(this.state.subsData).map(subtitle =>
+                    <li>
+                        <strong>Lang:</strong>{subtitle.lang}
+                        <strong>Url:</strong>{subtitle.url}
+                    </li>
+                )}
+            </ul>
         </div>
       </div>
     );

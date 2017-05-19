@@ -4,7 +4,18 @@ Based on the Open Subtitles JS Implementationß
 */
 /* eslint-disable */
 
-export function hashIt() {
+// utils.js
+
+export function getSubtitles(subtitles) {
+  return Object.keys(subtitles).map(key => {
+      return {
+          lang: subtitles[key].lang,
+          url: subtitles[key].url
+      };
+  });
+}
+
+export function hashIt(callback) {
   console.log("its working");
   var videoFile;
   var fs;
@@ -64,7 +75,7 @@ export function hashIt() {
             localStorage.setItem('myMovie', videoFile.name);
             console.log("MovieName - " + videoFile.name);
             console.log("MovieSize - " + videoFile.size);
-
+            callback(); // at this point, everything should be done
           }
         };
         g.readAsBinaryString(c)

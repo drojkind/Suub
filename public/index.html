@@ -1,12 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <title>SUUB Downloader</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script>
+    dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
+      evt.preventDefault();
+    };
+
+    dropContainer.ondrop = function(evt) {
+      // pretty simple -- but not for IE :(
+      files.files = evt.dataTransfer.files;
+      evt.preventDefault();
+    };
+  </script>
+  <title>SUUB Downloader</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
 </html>

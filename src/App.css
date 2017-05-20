@@ -1,14 +1,305 @@
+/*FILE AREA*/
+
+
+/* ===================== FILE INPUT ===================== */
+
+.file-area {
+  width: 100%;
+  position: relative;
+}
+
+.file-area input[type=file] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-area .file-dummy {
+  width: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+}
+
+.file-area .file-dummy .success {
+  display: none;
+}
+
+.file-area:hover .file-dummy {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.file-area input[type=file]:focus+.file-dummy {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.file-area input[type=file]:valid+.file-dummy {
+  border-color: rgba(0, 255, 0, 0.4);
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+.file-area input[type=file]:valid+.file-dummy .success {
+  display: inline-block;
+}
+
+.file-area input[type=file]:valid+.file-dummy .default {
+  display: none;
+}
+.default{
+  color: yellow;
+  font-size: 30px;
+}
+
+.success{
+  color: yellow;
+  font-size: 100px;
+}
+label {
+  font-weight: 500;
+  display: block;
+  margin: 4px 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+label span {
+  float: right;
+  text-transform: none;
+  font-weight: 200;
+  line-height: 1em;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.form-controll {
+  display: block;
+  padding: 8px 16px;
+  width: 100%;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-weight: 200;
+}
+
+.form-controll:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+button {
+  padding: 8px 30px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #053777;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 11px;
+  border: 0;
+  text-shadow: 0 1px 2px #fff;
+  cursor: pointer;
+}
+
+.form-group {
+  max-width: 564px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+
+/* CSS ANIMATION DOTS*/
+
+@keyframes blink {
+    /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+      opacity: .2;
+    }
+    /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+      opacity: 1;
+    }
+    /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+      opacity: .2;
+    }
+}
+
+.success span {
+    /**
+     * Use the blink animation, which is defined above
+     */
+    animation-name: blink;
+    /**
+     * The animation should take 1.4 seconds
+     */
+    animation-duration: 1.4s;
+    /**
+     * It will repeat itself forever
+     */
+    animation-iteration-count: infinite;
+    /**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+    animation-fill-mode: both;
+}
+
+.success span:nth-child(2) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .2s;
+}
+
+.success span:nth-child(3) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .4s;
+}
+
+/* THE REST OF THE CSS*/
+
+body {
+  background-color: black;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #222;
-  height: 40px;
-  padding: 20px 20px 40px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  z-index: 1000;
+  overflow: hidden;
+  -webkit-transition: height 0.3s;
+  -moz-transition: height 0.3s;
+  transition: height 0.3s;
+  text-align: center;
+  clear: both;
+}
+
+.App-intro {
+  padding-top: 100px;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
   color: white;
 }
 
 .subResults {
+  padding-top: 100px;
   display: none;
+}
+
+#subTitle{
+  float: center;
+}
+
+#menu{
+  align: right;
+  float: right;
+}
+#subList {
+  list-style: none;
+  padding-bottom: 30px;
+}
+
+#subUrl {
+  text-decoration: none;
+}
+
+#subLanguage {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: white;
+  padding: 0px;
+  text-transform: uppercase;
+  -webkit-transition: font-size 0.2s ease-in;
+  -moz-transition: font-size 0.2s ease-in;
+  -o-transition: font-size 0.2s ease-in;
+  transition: font-size 0.2s ease-in;
+  -webkit-transition: font-size 0.5s ease-out;
+  -moz-transition: font-size 0.5s ease-out;
+  -o-transition: font-size 0.5s ease-out;
+  transition: font-size 0.5s ease-out;
+}
+
+#subLanguage:hover {
+  color: lightgrey;
+  font-size: 70px;
+}
+
+#subLanguageYellow{
+  color: yellow;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  padding: 0px;
+  text-transform: uppercase;
+  -webkit-transition: font-size 0.2s ease-in;
+  -moz-transition: font-size 0.2s ease-in;
+  -o-transition: font-size 0.2s ease-in;
+  transition: font-size 0.2s ease-in;
+  -webkit-transition: font-size 0.5s ease-out;
+  -moz-transition: font-size 0.5s ease-out;
+  -o-transition: font-size 0.5s ease-out;
+  transition: font-size 0.5s ease-out;
+}
+
+#subLanguageYellow:hover {
+  color: red;
+  font-size: 10em;
+}
+
+
+#subContainer {
+  padding: 0px;
+  position: relative;
+}
+
+
+#subText {
+  font-family: Helvetica, sans-serif;
+  font-size: 30px;
+  color: yellow;
+  padding: 0px;
+}
+
+p {
+  margin: 0;
 }

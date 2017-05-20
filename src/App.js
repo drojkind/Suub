@@ -12,6 +12,12 @@ class App extends Component {
     this.getSubs = this.getSubs.bind(this);
   }
 
+  onDrop(files) {
+    this.setState({
+      files
+    });
+  }
+
   getSubs() {
 
     utils.hashIt(() => {
@@ -28,26 +34,42 @@ class App extends Component {
 
   }
 
-
   render() {
     return (
 
       <div className="App">
         <div className="App-header">
-          <h2>Subtitle downloader</h2>
+          <h2 id="subTitle">suub</h2>
         </div>
-        <p className="App-intro">
-          <input type="file" id="files" name="files[]" onChange={this.getSubs} />
+        <hr />
+
+        <p className="App-intro" style={{display: this.state.subsData ? 'none' : 'block'}}>
+
+          <div className="form-group file-area">
+            <input type="file" name="file[]" id="files" required="required" onChange={this.getSubs}/>
+            <div className="file-dummy">
+              <div className="success">Loading<span>.</span><span>.</span><span>.</span></div>
+              <div className="default">Drag any movie file onto this screen<br/>
+and we will try and find its subtitles</div>
+            </div>
+          </div>
+
+
         </p>
         <div className="subResults" id="subResults" style={{display: this.state.subsData ? 'block' : 'none'}}>
-            <ul>
+            <div id="subList">
                 {utils.getSubtitles(this.state.subsData).map(subtitle =>
-                    <li>
-                        <strong>Lang:</strong>{subtitle.lang}
-                        <strong>Url:</strong>{subtitle.url}
-                    </li>
+                    <div id="subContainer">
+                        <a id="subUrl" href={subtitle.url}><p id="subLanguage">{subtitle.lang}</p></a>
+                    </div>
                 )}
-            </ul>
+            </div>
+
+            <div id="subList">
+              <div id="subContainer">
+                <a id="subUrl" href="."><p id="subLanguageYellow">REFRESH PAGE</p></a>
+              </div>
+            </div>
         </div>
       </div>
     );

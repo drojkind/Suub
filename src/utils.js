@@ -10,7 +10,8 @@ export function getSubtitles(subtitles) {
   return Object.keys(subtitles).map(key => {
       return {
           lang: subtitles[key].lang,
-          url: subtitles[key].url
+          url: subtitles[key].url,
+          langKey: subtitles[key]
       };
   });
 }
@@ -68,7 +69,7 @@ export function hashIt(callback) {
             f = c.target.result;
             for (d = 0; d < f.length; d++) e[(d + 8) % 8] += f.charCodeAt(d);
             a = 'all';
-            //document.location = "http://www.opensubtitles.org/search/sublanguageid-" + a + "/moviehash-" + binl2hex(e);
+
             var movieHash = binl2hex(e);
             localStorage.setItem('myHash', binl2hex(e));
             console.log("MovieHash - " + movieHash);

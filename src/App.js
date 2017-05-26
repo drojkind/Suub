@@ -49,7 +49,7 @@ class App extends Component {
             <input type="file" name="file[]" id="files" required="required" onChange={this.getSubs}/>
             <div className="file-dummy">
               <div className="success">Loading<span>.</span><span>.</span><span>.</span></div>
-              <div className="default">Drag any movie file onto this screen<br/>
+              <div className="default">Drop a movie here or click to select<br/>
 and we will try and find its subtitles</div>
             </div>
           </div>

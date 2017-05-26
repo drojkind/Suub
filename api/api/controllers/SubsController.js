@@ -4,14 +4,14 @@
  * @description :: Server-side logic for managing subs
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+ const OpenSubtitles = require('opensubtitles-api');
+ const OS = new OpenSubtitles('OSTestUserAgentTemp');
 
 module.exports = {
   function(req, res) {
-    return res.send('Hi there!');
+    return res.send('NOTHING TO SEE HERE!...');
   },
   movie: function(req, res) {
-    const OpenSubtitles = require('opensubtitles-api');
-    const OS = new OpenSubtitles('OSTestUserAgentTemp');
     OS.search({
       //imdbid: 'tt0314979',
       //sublanguageid: 'es', // Set language to 'eng' only receive movies that are in english.

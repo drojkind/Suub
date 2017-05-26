@@ -44,7 +44,7 @@
 
 .file-area input[type=file]:valid+.file-dummy {
   border-color: rgba(0, 255, 0, 0.4);
-  background-color: rgba(0, 255, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .file-area input[type=file]:valid+.file-dummy .success {
@@ -61,7 +61,7 @@
 
 .success{
   color: yellow;
-  font-size: 100px;
+  font-size: 30px;
 }
 label {
   font-weight: 500;
